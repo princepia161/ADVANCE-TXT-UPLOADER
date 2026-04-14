@@ -589,11 +589,18 @@ try:
             url = f"https://dragoapi.vercel.app/video/{url}"
 
         elif 'videos.classplusapp' in url:
-            try:
-                url = requests.get("API_URL").json().get('url')
-            except:
+            res = requests.get(
+                f'https://api.classplusapp.com/cams/uploader/video/jw-signed-url?url={url}'
+            ).json()
+
+            url = res.get('url')
+
+            if not url:
                 print("API failed")
                 continue
+
+except Exception as e:
+    print("Error:", e)
 
 except Exception as e:
     print("Main loop error:", e)
