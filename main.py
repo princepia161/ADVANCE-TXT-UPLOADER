@@ -537,7 +537,7 @@ async def upload(bot: Client, m: Message):
     input4: Message = await bot.listen(editable.chat.id)
     raw_text4 = input4.text
     await input4.delete(True)
-    if raw_text4 == 3:
+    if raw_text4 == "3":
         MR = token
     else:
         MR = raw_text4
@@ -553,13 +553,13 @@ async def upload(bot: Client, m: Message):
     #thumb = input6.text
     thumb = input6.text
 
-if thumb.startswith("http://") or thumb.startswith("https://"):
+thumb = input6.text
+
+if thumb and (thumb.startswith("http://") or thumb.startswith("https://")):
     getstatusoutput(f"wget '{thumb}' -O 'thumb.jpg'")
     thumb = "thumb.jpg"
 else:
     thumb = "no"
-    else:
-        thumb = "no"
     failed_count =0
     if len(links) == 1:
         count = 1
@@ -577,17 +577,55 @@ else:
                         text = await resp.text()
                         url = re.search(r"(https://.*?playlist.m3u8.*?)\"", text).group(1)
                         
-            elif 'media-cdn.classplusapp.com/drm/' in url:
-                url = f"https://dragoapi.vercel.app/video/{url}"
+elif 'media-cdn.classplusapp.com/drm/' in url:
+    url = f"https://dragoapi.vercel.app/video/{url}"
 
-            elif 'videos.classplusapp' in url:                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               
-             url = requests.get(f'https://api.classplusapp.com/cams/uploader/video/jw-signed-url?url={url}', headers={'x-access-token': 'eyJhbGciOiJIUzM4NCIsInR5cCI6IkpXVCJ9.eyJpZCI6MTY0MDQwNzkyLCJvcmdJZCI6ODEyNDEwLCJ0eXBlIjoxLCJtb2JpbGUiOiI5MTgyMTAxNjk5NTEiLCJuYW1lIjoiUHJpbmNlcGlhIiwiZW1haWwiOiJwcmluY2VwaWExNjFAZ21haWwuY29tIiwiaXNJbnRlcm5hdGlvbmFsIjowLCJkZWZhdWx0TGFuZ3VhZ2UiOiJFTiIsImNvdW50cnlDb2RlIjoiSU4iLCJjb3VudHJ5SVNPIjoiOTEiLCJ0aW1lem9uZSI6IkdNVCs1OjMwIiwiaXNEaXkiOnRydWUsIm9yZ0NvZGUiOiJra3Vja3kiLCJpc0RpeVN1YmFkbWluIjowLCJmaW5nZXJwcmludElkIjoiNGI1ODRhYWNkYzZmNGIyYWFhYWEwNjU1NjdmNTRmMzQiLCJpYXQiOjE3NzYxNjEzMjIsImV4cCI6MTc3Njc2NjEyMn0.jgjoUK85Dtfts-OmWjulYQanxb642eoTSV1GHe-dU-XSa-6IpgGtrK5oD6ZFVPg8'}).json()['url']                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               
-            elif "tencdn.classplusapp" in url or "media-cdn-alisg.classplusapp.com" in url or "videos.classplusapp" in url or "media-cdn.classplusapp" in url:
-             headers = {'Host': 'api.classplusapp.com', 'x-access-token': 'eyJhbGciOiJIUzM4NCIsInR5cCI6IkpXVCJ9.eyJpZCI6MTY0MDQwNzkyLCJvcmdJZCI6ODEyNDEwLCJ0eXBlIjoxLCJtb2JpbGUiOiI5MTgyMTAxNjk5NTEiLCJuYW1lIjoiUHJpbmNlcGlhIiwiZW1haWwiOiJwcmluY2VwaWExNjFAZ21haWwuY29tIiwiaXNJbnRlcm5hdGlvbmFsIjowLCJkZWZhdWx0TGFuZ3VhZ2UiOiJFTiIsImNvdW50cnlDb2RlIjoiSU4iLCJjb3VudHJ5SVNPIjoiOTEiLCJ0aW1lem9uZSI6IkdNVCs1OjMwIiwiaXNEaXkiOnRydWUsIm9yZ0NvZGUiOiJra3Vja3kiLCJpc0RpeVN1YmFkbWluIjowLCJmaW5nZXJwcmludElkIjoiNGI1ODRhYWNkYzZmNGIyYWFhYWEwNjU1NjdmNTRmMzQiLCJpYXQiOjE3NzYxNjEzMjIsImV4cCI6MTc3Njc2NjEyMn0.jgjoUK85Dtfts-OmWjulYQanxb642eoTSV1GHe-dU-XSa-6IpgGtrK5oD6ZFVPg8', 'user-agent': 'Mobile-Android', 'app-version': '1.4.37.1', 'api-version': '18', 'device-id': '5d0d17ac8b3c9f51', 'device-details': '2848b866799971ca_2848b8667a33216c_SDK-30', 'accept-encoding': 'gzip'}
-             params = (('url', f'{url}'),)
-             response = requests.get('https://api.classplusapp.com/cams/uploader/video/jw-signed-url', headers=headers, params=params)
-             url = response.json()['url']
+elif 'videos.classplusapp' in url:
+    try:
+        res = requests.get(
+            f'https://api.classplusapp.com/cams/uploader/video/jw-signed-url?url={url}',
+            headers={
+                'x-access-token': 'eyJhbGciOiJIUzM4NCIsInR5cCI6IkpXVCJ9.eyJpZCI6MTY0MDQwNzkyLCJvcmdJZCI6ODEyNDEwLCJ0eXBlIjoxLCJtb2JpbGUiOiI5MTgyMTAxNjk5NTEiLCJuYW1lIjoiUHJpbmNlcGlhIiwiZW1haWwiOiJwcmluY2VwaWExNjFAZ21haWwuY29tIiwiaXNJbnRlcm5hdGlvbmFsIjowLCJkZWZhdWx0TGFuZ3VhZ2UiOiJFTiIsImNvdW50cnlDb2RlIjoiSU4iLCJjb3VudHJ5SVNPIjoiOTEiLCJ0aW1lem9uZSI6IkdNVCs1OjMwIiwiaXNEaXkiOnRydWUsIm9yZ0NvZGUiOiJra3Vja3kiLCJpc0RpeVN1YmFkbWluIjowLCJmaW5nZXJwcmludElkIjoiNGI1ODRhYWNkYzZmNGIyYWFhYWEwNjU1NjdmNTRmMzQiLCJpYXQiOjE3NzYxNjEzMjIsImV4cCI6MTc3Njc2NjEyMn0.jgjoUK85Dtfts-OmWjulYQanxb642eoTSV1GHe-dU-XSa-6IpgGtrK5oD6ZFVPg8'
+            }
+        ).json()
+
+        url = res.get('url')
+
+        if not url:
+            print("API failed")
+            continue
+
+    except Exception as e:
+        print("Error:", e)
+        continue
+
+
+elif "tencdn.classplusapp" in url or "media-cdn-alisg.classplusapp.com" in url or "videos.classplusapp" in url or "media-cdn.classplusapp" in url:
+    headers = {
+        'Host': 'api.classplusapp.com',
+        'x-access-token': 'eyJhbGciOiJIUzM4NCIsInR5cCI6IkpXVCJ9.eyJpZCI6MTY0MDQwNzkyLCJvcmdJZCI6ODEyNDEwLCJ0eXBlIjoxLCJtb2JpbGUiOiI5MTgyMTAxNjk5NTEiLCJuYW1lIjoiUHJpbmNlcGlhIiwiZW1haWwiOiJwcmluY2VwaWExNjFAZ21haWwuY29tIiwiaXNJbnRlcm5hdGlvbmFsIjowLCJkZWZhdWx0TGFuZ3VhZ2UiOiJFTiIsImNvdW50cnlDb2RlIjoiSU4iLCJjb3VudHJ5SVNPIjoiOTEiLCJ0aW1lem9uZSI6IkdNVCs1OjMwIiwiaXNEaXkiOnRydWUsIm9yZ0NvZGUiOiJra3Vja3kiLCJpc0RpeVN1YmFkbWluIjowLCJmaW5nZXJwcmludElkIjoiNGI1ODRhYWNkYzZmNGIyYWFhYWEwNjU1NjdmNTRmMzQiLCJpYXQiOjE3NzYxNjEzMjIsImV4cCI6MTc3Njc2NjEyMn0.jgjoUK85Dtfts-OmWjulYQanxb642eoTSV1GHe-dU-XSa-6IpgGtrK5oD6ZFVPg8',
+        'user-agent': 'Mobile-Android',
+        'app-version': '1.4.37.1',
+        'api-version': '18',
+        'device-id': '5d0d17ac8b3c9f51',
+        'device-details': '2848b866799971ca_2848b8667a33216c_SDK-30',
+        'accept-encoding': 'gzip'
+    }
+
+    params = (('url', f'{url}'),)
+
+    response = requests.get(
+        'https://api.classplusapp.com/cams/uploader/video/jw-signed-url',
+        headers=headers,
+        params=params
+    )
+
+    data = response.json()
+    url = data.get('url')
+
+    if not url:
+        print("API failed")
+        continue
 
             elif "https://appx-transcoded-videos.livelearn.in/videos/rozgar-data/" in url:
                 url = url.replace("https://appx-transcoded-videos.livelearn.in/videos/rozgar-data/", "")
