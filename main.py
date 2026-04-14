@@ -577,8 +577,22 @@ else:
                         text = await resp.text()
                         url = re.search(r"(https://.*?playlist.m3u8.*?)\"", text).group(1)
                         
-elif 'media-cdn.classplusapp.com/drm/' in url:
-    url = f"https://dragoapi.vercel.app/video/{url}"
+try:
+    for i in range(count - 1, len(links)):
+        V = links[i][1]
+        url = "https://" + V
+
+        if "visionias" in url:
+            pass
+
+        elif 'media-cdn.classplusapp.com/drm/' in url:
+            url = f"https://dragoapi.vercel.app/video/{url}"
+
+        elif 'videos.classplusapp' in url:
+            url = requests.get("API_URL").json().get('url')
+
+except Exception as e:
+    print("Error:", e)
 
 elif 'videos.classplusapp' in url:
     try:
